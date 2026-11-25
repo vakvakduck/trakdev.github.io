@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tarık Yahya Aslan (Trakdev)</title>
+  <meta name="description" content="Tarık Yahya Aslan — Oyun geliştirme, Minecraft modları ve Linux projeleri." />
+
+  <!-- Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #000000;
+      color: #ededed;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    /* Minimal scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #000000;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #262626;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #404040;
+    }
+  </style>
+</head>
+<body class="bg-black text-neutral-100 min-h-screen flex flex-col">
+
+  <!-- Üst Menü -->
+  <header class="sticky top-0 z-40 bg-black/85 backdrop-blur-md border-b border-neutral-900">
+    <div class="max-w-3xl mx-auto px-5 h-16 flex items-center justify-between">
+      <a href="#top" class="font-mono text-sm font-medium text-white tracking-tight hover:text-neutral-300 transition-colors">
+        trakdev
+      </a>
+
+      <nav class="flex items-center gap-5 sm:gap-6 text-sm text-neutral-400">
+        <a href="#projeler" class="hover:text-white transition-colors" data-i18n="nav_projects">Projeler</a>
+        <a href="#araclar" class="hover:text-white transition-colors" data-i18n="nav_tools">Araçlar</a>
+        <a href="#hesaplar" class="hover:text-white transition-colors" data-i18n="nav_links">Hesaplar</a>
+        <button
+          id="lang-btn"
+          type="button"
+          class="font-mono text-xs px-2.5 py-1 rounded-md border border-neutral-800 text-neutral-300 hover:border-neutral-600 hover:text-white transition-colors cursor-pointer"
+        >
+          EN
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Ana İçerik -->
+  <main id="top" class="flex-1 max-w-3xl w-full mx-auto px-5 pt-14 pb-24 space-y-20">
+
+    <!-- Giriş / Hakkımda -->
+    <section class="space-y-6">
+      <div class="space-y-2">
+        <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight text-white">
+          Tarık Yahya Aslan
+        </h1>
+        <p class="font-mono text-sm text-neutral-500">
+          trakdev · trakdev.com.tr
+        </p>
+      </div>
+
+      <p class="text-neutral-300 text-base sm:text-[17px] leading-relaxed max-w-2xl" data-i18n="bio">
+        Oyun geliştiriyor, Minecraft modları yazıyor ve Linux sistemlerle uğraşıyorum. Genelde Unity, Godot ve Blender kullanarak kendi projelerimi yapıyorum; fırsat buldukça da Mağara Jam gibi etkinliklere katılıyorum.
+      </p>
+
+      <!-- Hızlı Linkler -->
+      <div class="flex flex-wrap items-center gap-2.5 pt-1">
+        <a href="https://github.com/vakvakduck" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-lg bg-white text-black text-sm font-medium hover:bg-neutral-200 transition-colors">
+          GitHub
+        </a>
+        <a href="https://trakdev.itch.io/" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-lg bg-neutral-950 border border-neutral-800 text-neutral-200 text-sm hover:border-neutral-600 hover:text-white transition-colors">
+          itch.io
+        </a>
+        <a href="https://www.linkedin.com/in/tar%C4%B1k-yahya-aslan-81799341b" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-lg bg-neutral-950 border border-neutral-800 text-neutral-200 text-sm hover:border-neutral-600 hover:text-white transition-colors">
+          LinkedIn
+        </a>
+        <a href="https://www.youtube.com/@Trakdev" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-lg bg-neutral-950 border border-neutral-800 text-neutral-200 text-sm hover:border-neutral-600 hover:text-white transition-colors">
+          YouTube
+        </a>
+        <a href="https://www.instagram.com/trakdev/" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-lg bg-neutral-950 border border-neutral-800 text-neutral-200 text-sm hover:border-neutral-600 hover:text-white transition-colors">
+          Instagram
+        </a>
+      </div>
+    </section>
+
+    <!-- Projeler -->
+    <section id="projeler" class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-900 pb-4">
+        <h2 class="text-lg font-medium text-white" data-i18n="projects_title">Projeler</h2>
+
+        <!-- Sade Filtre -->
+        <div class="flex flex-wrap gap-1.5" id="filter-bar">
+          <button type="button" data-filter="all" class="filter-btn px-3 py-1.5 rounded-md text-xs font-mono bg-white text-black transition-colors cursor-pointer" data-i18n="filter_all">Hepsi</button>
+          <button type="button" data-filter="games" class="filter-btn px-3 py-1.5 rounded-md text-xs font-mono bg-transparent text-neutral-400 hover:text-white border border-neutral-800 transition-colors cursor-pointer" data-i18n="filter_games">Oyun</button>
+          <button type="button" data-filter="mods" class="filter-btn px-3 py-1.5 rounded-md text-xs font-mono bg-transparent text-neutral-400 hover:text-white border border-neutral-800 transition-colors cursor-pointer" data-i18n="filter_mods">Mod</button>
+          <button type="button" data-filter="systems" class="filter-btn px-3 py-1.5 rounded-md text-xs font-mono bg-transparent text-neutral-400 hover:text-white border border-neutral-800 transition-colors cursor-pointer" data-i18n="filter_systems">Sistem</button>
+        </div>
+      </div>
+
+      <!-- Proje Listesi -->
+      <div id="projects-list" class="grid grid-cols-1 gap-3.5">
+        <!-- JS ile dolduruluyor -->
+      </div>
+    </section>
+
+    <!-- Kullandığım Araçlar -->
+    <section id="araclar" class="space-y-6">
+      <div class="border-b border-neutral-900 pb-4">
+        <h2 class="text-lg font-medium text-white" data-i18n="tools_title">Kullandığım Araçlar</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="p-4 rounded-xl bg-neutral-950 border border-neutral-900 space-y-2">
+          <div class="font-mono text-xs text-neutral-500 uppercase" data-i18n="tool_cat_1">Oyun Motorları & Diller</div>
+          <p class="text-sm text-neutral-200 leading-relaxed">
+            Unity (C#), Godot 4 (GDScript), Java (Minecraft Modding), HTML / CSS / JS
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-neutral-950 border border-neutral-900 space-y-2">
+          <div class="font-mono text-xs text-neutral-500 uppercase" data-i18n="tool_cat_2">3D & Görsel</div>
+          <p class="text-sm text-neutral-200 leading-relaxed">
+            Blender 3D, Pixel Art, Voxel Modelleme
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-neutral-950 border border-neutral-900 space-y-2">
+          <div class="font-mono text-xs text-neutral-500 uppercase" data-i18n="tool_cat_3">Sistem & Linux</div>
+          <p class="text-sm text-neutral-200 leading-relaxed">
+            Debian Linux (live-build), Bash, VirtualBox, Git & GitHub
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-neutral-950 border border-neutral-900 space-y-2">
+          <div class="font-mono text-xs text-neutral-500 uppercase" data-i18n="tool_cat_4">Yayın & Topluluk</div>
+          <p class="text-sm text-neutral-200 leading-relaxed">
+            itch.io, CurseForge, Modrinth, Mağara Jam
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tüm Hesaplar -->
+    <section id="hesaplar" class="space-y-6">
+      <div class="border-b border-neutral-900 pb-4">
+        <h2 class="text-lg font-medium text-white" data-i18n="links_title">Hesaplarım</h2>
+      </div>
+
+      <div id="links-list" class="divide-y divide-neutral-900 border-t border-b border-neutral-900">
+        <!-- JS ile dolduruluyor -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Alt Bilgi -->
+  <footer class="border-t border-neutral-900">
+    <div class="max-w-3xl mx-auto px-5 py-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-neutral-500">
+      <span>Tarık Yahya Aslan · Trakdev</span>
+      <span>2026 · trakdev.com.tr</span>
+    </div>
+  </footer>
+
+  <!-- Proje Detay Penceresi -->
+  <div id="modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="w-full max-w-lg rounded-xl bg-neutral-950 border border-neutral-800 overflow-hidden">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-neutral-900">
+        <div>
+          <h3 id="modal-title" class="text-base font-semibold text-white"></h3>
+          <p id="modal-cat" class="font-mono text-xs text-neutral-500 mt-0.5"></p>
+        </div>
+        <button id="modal-close" type="button" aria-label="Kapat" class="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-900 transition-colors cursor-pointer">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="p-5 space-y-5 max-h-[75vh] overflow-y-auto">
+        <p id="modal-desc" class="text-sm text-neutral-300 leading-relaxed"></p>
+
+        <ul id="modal-points" class="space-y-2 text-sm text-neutral-400"></ul>
+
+        <div id="modal-tags" class="flex flex-wrap gap-1.5 pt-1"></div>
+
+        <div id="modal-links" class="pt-4 border-t border-neutral-900 flex flex-wrap gap-2.5"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      let lang = 'tr';
+      let currentFilter = 'all';
+
+      // Sade ve doğal metinler (TR / EN)
+      const text = {
+        tr: {
+          nav_projects: 'Projeler',
+          nav_tools: 'Araçlar',
+          nav_links: 'Hesaplar',
+          bio: 'Oyun geliştiriyor, Minecraft modları yazıyor ve Linux sistemlerle uğraşıyorum. Genelde Unity, Godot ve Blender kullanarak kendi projelerimi yapıyorum; fırsat buldukça da Mağara Jam gibi etkinliklere katılıyorum.',
+          projects_title: 'Projeler',
+          filter_all: 'Hepsi',
+          filter_games: 'Oyun',
+          filter_mods: 'Mod',
+          filter_systems: 'Sistem',
+          tools_title: 'Kullandığım Araçlar',
+          tool_cat_1: 'Oyun Motorları & Diller',
+          tool_cat_2: '3D & Görsel',
+          tool_cat_3: 'Sistem & Linux',
+          tool_cat_4: 'Yayın & Topluluk',
+          links_title: 'Hesaplarım',
+          details: 'Detay',
+        },
+        en: {
+          nav_projects: 'Projects',
+          nav_tools: 'Tools',
+          nav_links: 'Links',
+          bio: 'I make indie games, write Minecraft mods, and tinker with Linux systems. Most of my work is built with Unity, Godot, and Blender, and I occasionally join game jams like Mağara Jam.',
+          projects_title: 'Projects',
+          filter_all: 'All',
+          filter_games: 'Games',
+          filter_mods: 'Mods',
+          filter_systems: 'Systems',
+          tools_title: 'Tools & Stack',
+          tool_cat_1: 'Engines & Languages',
+          tool_cat_2: '3D & Art',
+          tool_cat_3: 'Systems & Linux',
+          tool_cat_4: 'Platforms',
+          links_title: 'Links',
+          details: 'Details',
+        },
+      };
+
+      const projects = [
+        {
+          id: 'trakcraft',
+          category: 'games',
+          label: { tr: '3D Voxel · Godot 4', en: '3D Voxel · Godot 4' },
+          title: 'Trakcraft',
+          summary: {
+            tr: 'Godot 4 ile geliştirdiğim 3D voxel sandbox oyunu. Chunk üretimi, blok yerleştirme/kırma ve PC/mobil kontroller üzerine çalışıyorum.',
+            en: 'A 3D voxel sandbox game built with Godot 4. Focused on chunk generation, block building/breaking, and PC/mobile controls.',
+          },
+          points: {
+            tr: [
+              'Godot 4 üzerinde chunk tabanlı dünya üretimi',
+              'Pixel-art blok dokuları',
+              'PC ve mobil dokunmatik kontrol desteği',
+            ],
+            en: [
+              'Chunk-based world generation in Godot 4',
+              'Pixel-art block textures',
+              'Support for both PC and mobile touch controls',
+            ],
+          },
+          tags: ['Godot 4', 'GDScript', '3D Voxel'],
+          links: [
+            { name: 'GitHub', url: 'https://github.com/vakvakduck' },
+            { name: 'itch.io', url: 'https://trakdev.itch.io/' },
+          ],
+        },
+        {
+          id: 'hotline-van',
+          category: 'games',
+          label: { tr: '2D Roguelike · Godot', en: '2D Roguelike · Godot' },
+          title: 'Hotline Van',
+          summary: {
+            tr: 'Üstten görünüşlü 2D aksiyon roguelike projem. Rastgele oluşan odalar, hızlı çatışma ve eşya sinerjileri üzerine kurulu.',
+            en: 'A top-down 2D action roguelike featuring procedural rooms, fast combat, and item synergies.',
+          },
+          points: {
+            tr: [
+              'Hızlı tempolu 2D top-down oynanış',
+              'Her turda değişen prosedürel oda düzeni',
+              'Birbiriyle etkileşime giren eşya ve yetenekler',
+            ],
+            en: [
+              'Fast-paced 2D top-down gameplay',
+              'Procedural room layouts on every run',
+              'Synergistic items and abilities',
+            ],
+          },
+          tags: ['Godot', 'GDScript', '2D', 'Pixel Art'],
+          links: [
+            { name: 'itch.io', url: 'https://trakdev.itch.io/' },
+          ],
+        },
+        {
+          id: 'mc-mods',
+          category: 'mods',
+          label: { tr: 'Minecraft Modding · Java', en: 'Minecraft Modding · Java' },
+          title: { tr: 'Minecraft Modları', en: 'Minecraft Mods' },
+          summary: {
+            tr: 'vakvakduck7 kullanıcı adıyla geliştirip CurseForge ve Modrinth üzerinde paylaştığım Minecraft modları.',
+            en: 'Minecraft mods developed and published under vakvakduck7 on CurseForge and Modrinth.',
+          },
+          points: {
+            tr: [
+              'CurseForge ve Modrinth üzerinde yayınlanan mod projeleri',
+              'Oyuna yeni bloklar, eşyalar ve mekanikler ekleyen eklentiler',
+              'Oyuncu geri bildirimlerine göre düzenli güncellemeler',
+            ],
+            en: [
+              'Published mod releases on CurseForge and Modrinth',
+              'Custom blocks, items, and gameplay mechanics',
+              'Regular updates based on player feedback',
+            ],
+          },
+          tags: ['Java', 'CurseForge', 'Modrinth'],
+          links: [
+            { name: 'CurseForge', url: 'https://www.curseforge.com/members/vakvakduck7/projects' },
+            { name: 'Modrinth', url: 'https://modrinth.com/user/vakvakduck7' },
+          ],
+        },
+        {
+          id: 'tarikos',
+          category: 'systems',
+          label: { tr: 'Linux · Debian live-build', en: 'Linux · Debian live-build' },
+          title: 'TarikOS',
+          summary: {
+            tr: 'Debian tabanlı, live-build kullanarak sıfırdan derlediğim kişisel Linux dağıtımı denemem.',
+            en: 'A personal Debian-based Linux distribution experiment built from scratch using live-build.',
+          },
+          points: {
+            tr: [
+              'Debian live-build ile önyüklenebilir ISO derleme',
+              'Özel masaüstü düzeni ve giriş ekranı özelleştirmeleri',
+              'VirtualBox üzerinde test edilen paket yapılandırması',
+            ],
+            en: [
+              'Bootable ISO builds using Debian live-build',
+              'Custom desktop layout and login screen tweaks',
+              'Tested and iterated inside VirtualBox',
+            ],
+          },
+          tags: ['Debian', 'live-build', 'Bash', 'VirtualBox'],
+          links: [
+            { name: 'GitHub', url: 'https://github.com/vakvakduck' },
+          ],
+        },
+        {
+          id: 'jams',
+          category: 'games',
+          label: { tr: 'Game Jam · Unity / C#', en: 'Game Jam · Unity / C#' },
+          title: { tr: 'Mağara Jam & Unity Prototipleri', en: 'Mağara Jam & Unity Prototypes' },
+          summary: {
+            tr: 'Mağara Jam için kısıtlı sürede çıkardığım oyunlar ve Unity (C#) ile yaptığım küçük mekanik denemeleri.',
+            en: 'Games built under tight deadlines for Mağara Jam alongside smaller Unity (C#) gameplay prototypes.',
+          },
+          points: {
+            tr: [
+              'Mağara Jam etkinlikleri için geliştirilen oyunlar',
+              'Unity ve C# ile hızlı prototipleme çalışmaları',
+              'itch.io üzerinde oynanabilir indie arşivim',
+            ],
+            en: [
+              'Game jam entries submitted to Mağara Jam',
+              'Rapid gameplay prototyping in Unity & C#',
+              'Playable indie archive hosted on itch.io',
+            ],
+          },
+          tags: ['Unity', 'C#', 'Mağara Jam', 'itch.io'],
+          links: [
+            { name: 'Mağara Jam', url: 'https://magarajam.com/profile/vakvakduck' },
+            { name: 'itch.io', url: 'https://trakdev.itch.io/' },
+          ],
+        },
+      ];
+
+      const links = [
+        { name: 'GitHub', handle: 'vakvakduck', url: 'https://github.com/vakvakduck', note: { tr: 'Kod depolarım', en: 'Source code & repos' } },
+        { name: 'LinkedIn', handle: 'Tarık Yahya Aslan', url: 'https://www.linkedin.com/in/tar%C4%B1k-yahya-aslan-81799341b', note: { tr: 'Profesyonel profil', en: 'Professional profile' } },
+        { name: 'itch.io', handle: 'trakdev.itch.io', url: 'https://trakdev.itch.io/', note: { tr: 'Yayınladığım oyunlar', en: 'Published games' } },
+        { name: 'CurseForge', handle: 'vakvakduck7', url: 'https://www.curseforge.com/members/vakvakduck7/projects', note: { tr: 'Minecraft modları', en: 'Minecraft mods' } },
+        { name: 'Modrinth', handle: 'vakvakduck7', url: 'https://modrinth.com/user/vakvakduck7', note: { tr: 'Minecraft modları', en: 'Minecraft mods' } },
+        { name: 'Mağara Jam', handle: 'vakvakduck', url: 'https://magarajam.com/profile/vakvakduck', note: { tr: 'Game jam profili', en: 'Game jam profile' } },
+        { name: 'Instagram', handle: '@trakdev', url: 'https://www.instagram.com/trakdev/', note: { tr: 'Kısa paylaşımlar', en: 'Short updates' } },
+        { name: 'YouTube', handle: 'Trakdev', url: 'https://www.youtube.com/@Trakdev', note: { tr: 'Geliştirme videoları', en: 'Dev videos' } },
+      ];
+
+      const projectsList = document.getElementById('projects-list');
+      const linksList = document.getElementById('links-list');
+      const modal = document.getElementById('modal');
+
+      function getTitle(p) {
+        return typeof p.title === 'string' ? p.title : p.title[lang];
+      }
+
+      function renderProjects() {
+        const filtered = currentFilter === 'all'
+          ? projects
+          : projects.filter(p => p.category === currentFilter);
+
+        projectsList.innerHTML = filtered.map(p => `
+          <article
+            data-id="${p.id}"
+            class="project-item group p-5 rounded-xl bg-neutral-950 border border-neutral-900 hover:border-neutral-700 transition-colors cursor-pointer"
+          >
+            <div class="flex items-start justify-between gap-4">
+              <div class="space-y-1.5">
+                <div class="flex flex-wrap items-center gap-2.5">
+                  <h3 class="text-base font-medium text-white group-hover:underline underline-offset-4">
+                    ${getTitle(p)}
+                  </h3>
+                  <span class="font-mono text-xs text-neutral-500">${p.label[lang]}</span>
+                </div>
+                <p class="text-sm text-neutral-400 leading-relaxed">
+                  ${p.summary[lang]}
+                </p>
+              </div>
+              <span class="text-neutral-600 group-hover:text-white transition-colors shrink-0 mt-0.5 text-sm">↗</span>
+            </div>
+
+            <div class="flex flex-wrap gap-1.5 mt-4">
+              ${p.tags.map(t => `<span class="px-2 py-0.5 rounded bg-neutral-900 text-neutral-400 font-mono text-[11px]">${t}</span>`).join('')}
+            </div>
+          </article>
+        `).join('');
+
+        document.querySelectorAll('.project-item').forEach(el => {
+          el.addEventListener('click', () => {
+            const proj = projects.find(p => p.id === el.dataset.id);
+            if (proj) openModal(proj);
+          });
+        });
+      }
+
+      function renderLinks() {
+        linksList.innerHTML = links.map(item => `
+          <a
+            href="${item.url}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="py-3.5 px-2 -mx-2 rounded-lg flex items-center justify-between gap-4 hover:bg-neutral-950 transition-colors group"
+          >
+            <div class="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-3 min-w-0">
+              <span class="text-sm font-medium text-white">${item.name}</span>
+              <span class="font-mono text-xs text-neutral-500 truncate">${item.handle}</span>
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <span class="hidden sm:inline text-xs text-neutral-500">${item.note[lang]}</span>
+              <span class="text-neutral-600 group-hover:text-white transition-colors text-sm">↗</span>
+            </div>
+          </a>
+        `).join('');
+      }
+
+      function openModal(proj) {
+        document.getElementById('modal-title').textContent = getTitle(proj);
+        document.getElementById('modal-cat').textContent = proj.label[lang];
+        document.getElementById('modal-desc').textContent = proj.summary[lang];
+        document.getElementById('modal-points').innerHTML = proj.points[lang]
+          .map(pt => `<li class="flex items-start gap-2"><span class="text-neutral-600">—</span><span>${pt}</span></li>`)
+          .join('');
+        document.getElementById('modal-tags').innerHTML = proj.tags
+          .map(t => `<span class="px-2.5 py-1 rounded bg-neutral-900 border border-neutral-800 font-mono text-xs text-neutral-300">${t}</span>`)
+          .join('');
+        document.getElementById('modal-links').innerHTML = proj.links
+          .map(l => `
+            <a href="${l.url}" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-lg bg-white text-black text-xs font-medium hover:bg-neutral-200 transition-colors">
+              ${l.name} ↗
+            </a>
+          `).join('');
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+      }
+
+      document.getElementById('modal-close').addEventListener('click', closeModal);
+      modal.addEventListener('click', e => {
+        if (e.target === modal) closeModal();
+      });
+      window.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+      });
+
+      // Filtre butonları
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentFilter = btn.dataset.filter;
+          document.querySelectorAll('.filter-btn').forEach(b => {
+            b.className = 'filter-btn px-3 py-1.5 rounded-md text-xs font-mono bg-transparent text-neutral-400 hover:text-white border border-neutral-800 transition-colors cursor-pointer';
+          });
+          btn.className = 'filter-btn px-3 py-1.5 rounded-md text-xs font-mono bg-white text-black transition-colors cursor-pointer';
+          renderProjects();
+        });
+      });
+
+      // Dil değiştirici
+      const langBtn = document.getElementById('lang-btn');
+      function updateLang() {
+        document.documentElement.lang = lang;
+        langBtn.textContent = lang === 'tr' ? 'EN' : 'TR';
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (text[lang][key]) el.textContent = text[lang][key];
+        });
+        renderProjects();
+        renderLinks();
+      }
+
+      langBtn.addEventListener('click', () => {
+        lang = lang === 'tr' ? 'en' : 'tr';
+        updateLang();
+      });
+
+      updateLang();
+    })();
+  </script>
+</body>
+</html>
